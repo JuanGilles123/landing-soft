@@ -7,6 +7,12 @@
     <title>FluxSoft Product</title>
   </head>
   <body>
+    <!-- Formulario oculto para Netlify Forms -->
+    <form name="checkout" netlify netlify-honeypot="bot-field" hidden>
+      <input type="email" name="email" />
+      <input name="bot-field" />
+    </form>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

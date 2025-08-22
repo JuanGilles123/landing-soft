@@ -70,12 +70,13 @@ export default function LandingLimitedStock() {
   const handleBuy = () => setShowCheckout(true);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulación de checkout
+    // El formulario se enviará automáticamente a Netlify
+    // Solo actualizamos el estado local para mostrar confirmación
     setSubmitted(true);
     setTimeout(() => {
       setShowCheckout(false);
       setSold((s) => Math.min(s + 1, CONFIG.stock.total));
-    }, 900);
+    }, 2000);
   };
 
   return (
@@ -270,11 +271,23 @@ export default function LandingLimitedStock() {
             <p className="mt-1 text-sm text-neutral-400">
               Recibirás el enlace de pago y tu licencia por correo.
             </p>
-            <form onSubmit={handleSubmit} className="mt-5 grid gap-3">
+            <form 
+              name="checkout" 
+              method="POST" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit} 
+              className="mt-5 grid gap-3"
+            >
+              <input type="hidden" name="form-name" value="checkout" />
+              <p className="hidden">
+                <label>Don't fill this out: <input name="bot-field" /></label>
+              </p>
               <label className="text-sm">
                 Correo electrónico
                 <input
                   type="email"
+                  name="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
