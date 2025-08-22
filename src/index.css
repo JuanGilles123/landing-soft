@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* Tip opcional: suavizado */
+:root { color-scheme: dark; }
